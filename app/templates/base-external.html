@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Flixr</title>
+    {% endif %}
+
+    <!-- Import Google Icon Font -->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Import materialise.css -->
+    <link type="text/css" rel="stylesheet" href="../static/css/materialize.css" media="screen, projection">
+
+    <!-- Import base-ext.css -->
+    <link type="text/css" rel="stylesheet" href="../static/css/base-ext.css" media="screen, projection">
+
+    <!-- Let browser know website is optimised for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <nav role="navigation">
+        <div class="nav-wrapper container">
+            <ul class="right hide-on-med-and-down">
+                <li class="waves-effect waves-light"><a href="/login"><i class="material-icons right">play_for_work</i>Login</a></li>
+                <li class="waves-effect waves-light"><a href="/register"><i class="material-icons right">mode_edit</i>Register</a></li>
+            </ul>
+
+            <ul id="nav-mobile" class="side-nav">
+                <li><a href="/login"><i class="material-icons left">play_for_work</i>Login</a></li>
+                <li><a href="/register"><i class="material-icons left">mode_edit</i>Register</a></li>
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+    
+    {% block content %}{% endblock %}
+
+    <!-- Import jQuery, materialize.js and custom JS -->
+    <script src="../static/js/jquery-2.2.3.js"></script>
+    <script src="../static/js/materialize.js"></script>
+    <script src="../static/js/global.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>

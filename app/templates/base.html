@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    
+    <!-- Import Google Icon Font -->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Import materialise.css -->
+    <link type="text/css" rel="stylesheet" href="../static/css/materialize.css" media="screen, projection">
+
+    <!-- Import global.css -->
+    <link type="text/css" rel="stylesheet" href="../static/css/global.css">
+
+    <!-- Let browser know website is optimised for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Flixr</title>
+    {% endif %}
+</head>
+<body>
+    <header>
+      <nav class="top-nav">
+        <div class="container">
+          <div class="nav-wrapper"><a class="page-title">{{ title }}</a></div>
+        </div>
+      </nav>
+      <div class="container"><a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+      <ul id="nav-mobile" class="side-nav fixed">
+        <li class="logo"><a id="logo-container" href="#" class="brand-logo">
+            <object id="front-page-logo" type="image/svg+xml" data="../static/images/flixr.svg">Your browser does not support SVG</object></a></li>
+        <li class="search">
+          <div class="search-wrapper card">
+            <input id="search"><i class="material-icons">search</i>
+            <div class="search-results"></div>
+          </div>
+        </li>
+        <br>
+        <li class="bold"><a href="/bookmarks" class="waves-effect waves-teal">Bookmarks</a></li>
+        <li class="bold"><a href="/logout" class="waves-effect waves-teal">Log Out</a></li>
+        <br>
+        <li class="bold"><a href="/discover" class="waves-effect waves-teal">Discover</a></li>
+        <li class="no-padding">
+          <ul class="collapsible collapsible-accordion">
+            <li class="bold"><a class="collapsible-header active waves-effect waves-teal">Genres</a>
+              <div class="collapsible-body">
+                <ul class="genrelist">
+                  <li><a href="#">Color</a></li>
+                  <li><a href="#">Grid</a></li>
+                  <li><a href="#">Helpers</a></li>
+                  <li><a href="#">Media</a></li>
+                  <li><a href="#">Sass</a></li>
+                  <li><a href="#">Shadow</a></li>
+                  <li><a href="#">Table</a></li>
+                  <li><a href="#">Typography</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </header>
+    <main>
+        <div class="container">
+            <div class="cardgrid">
+                <!-- Populated dynamically -->
+            </div>
+            {% block content %}{% endblock %}
+        </div> 
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container">
+        James Bream 2016, All movie data provided by TMDB.
+        </div>
+      </div>
+    </footer>
+    
+    <!-- Import jQuery, materialize.js and custom JS -->
+    <script src="../static/js/jquery-2.2.3.js"></script>
+    <script src="../static/js/materialize.js"></script>
+    <script src="../static/js/global.js"></script>
+    {% block script %}{% endblock %}
+</body>
+</html>

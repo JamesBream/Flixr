@@ -1,0 +1,12 @@
+#front-page-logo {
+    display: inline-block;
+    height: 100%;
+    pointer-events: none;
+    max-width: 75%;
+}
+
+#login-register-page-logo {
+    display: inline-block;
+    height: auto;
+    max-width: 25%;
+}
