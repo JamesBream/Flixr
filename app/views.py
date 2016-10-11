@@ -210,35 +210,37 @@ def getMovieDetails(mid):
 @application.route('/getBookmarks')
 def getBookmarks():
     if session.get('user'):
-        #REMEMBER TRY STATEMENT
-        _user = session.get('user')
-        
-        cur = mysql.connection.cursor()
-        cur.execute("SELECT user_id, movie_id FROM tbl_bookmark WHERE user_id = %s", (_user,))
-        
-        rv = cur.fetchall()
-        
-        bookmarks_dict = []
-        if len(rv) > 0:
-            base_url = application.config['API_CONFIG']['images']['base_url']
-            poster_size = application.config['API_CONFIG']['images']['poster_sizes'][3] #w342
-            
-            for movie in rv:
-                
-                # Configure the parameter payload
-                payload = {'api_key': application.config['API_KEY']}
-                r = requests.get('https://api.themoviedb.org/3/movie/' + str(movie[1]), params=payload)
-                data = r.json()
-                
-                movie_dict = {
-                    'Id_User': movie[0],
-                    'Id_Movie': movie[1],
-                    'Title': data['title'],
-                    'Overview': data['overview'],
-                    'Poster_Path': (base_url + poster_size + data['poster_path'])
-                }
-                bookmarks_dict.append(movie_dict)
-        return json.dumps(bookmarks_dict) 
+        try:
+            _user = session.get('user')
+
+            cur = mysql.connection.cursor()
+            cur.execute("SELECT user_id, movie_id FROM tbl_bookmark WHERE user_id = %s", (_user,))
+
+            rv = cur.fetchall()
+
+            bookmarks_dict = []
+            if len(rv) > 0:
+                base_url = application.config['API_CONFIG']['images']['base_url']
+                poster_size = application.config['API_CONFIG']['images']['poster_sizes'][3] #w342
+
+                for movie in rv:
+
+                    # Configure the parameter payload
+                    payload = {'api_key': application.config['API_KEY']}
+                    r = requests.get('https://api.themoviedb.org/3/movie/' + str(movie[1]), params=payload)
+                    data = r.json()
+
+                    movie_dict = {
+                        'Id_User': movie[0],
+                        'Id_Movie': movie[1],
+                        'Title': data['title'],
+                        'Overview': data['overview'],
+                        'Poster_Path': (base_url + poster_size + data['poster_path'])
+                    }
+                    bookmarks_dict.append(movie_dict)
+            return json.dumps(bookmarks_dict)
+        except Exception as e:
+            return json.dumps({'error': str(e)})
 
 
 @application.route('/bookmark/<int:mid>')
